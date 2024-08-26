@@ -3,7 +3,7 @@ import { Box, Paper } from '@mui/material';
 
 const BasePanel = styled(Paper)(({ theme }) => {
   return {
-    minHeight: '100%',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
@@ -38,7 +38,8 @@ const Panel = ({
       >
         {header}
       </Box>
-      <Box sx={{ p: 2 }}>{body}</Box>
+      {/* TODO: Check/clean up the re-used padding */}
+      <Box sx={{ px: 2, py: 1.25, overflowY: 'auto' }}>{body}</Box>
       {footer && <Box sx={{ p: 2 }}>{footer}</Box>}
     </BasePanel>
   );
