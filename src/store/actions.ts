@@ -9,7 +9,7 @@ export enum Actions {
 
 type SetSelectedConversationIdType = {
   type: Actions.SET_SELECTED_CONVERSATION_ID;
-  payload: Conversation['id'];
+  payload?: Conversation['id'];
 };
 type AddConversationType = {
   type: Actions.ADD_CONVERSATION;
@@ -28,7 +28,7 @@ export type AppActions =
   | AddMessageType;
 
 export function setSelectedConversationId(
-  id: Conversation['id']
+  id?: Conversation['id']
 ): SetSelectedConversationIdType {
   return { type: Actions.SET_SELECTED_CONVERSATION_ID, payload: id };
 }

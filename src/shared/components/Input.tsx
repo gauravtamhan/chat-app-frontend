@@ -10,14 +10,17 @@ const StyledInput = styled(InputBase)(({ theme }) => ({
     backgroundColor:
       theme.palette.mode === 'light' ? 'rgba(134, 142, 153, 0.1)' : '#1A2027',
   },
-  '&.Mui-focused': {
-    outline: `2px solid ${theme.palette.primary.main}`,
+  '&.MuiInputBase-multiline': {
+    padding: 0,
   },
   '&.MuiInputBase-adornedStart': {
     paddingLeft: 10,
   },
   '& .MuiInputBase-input': {
-    padding: '7px 10px 7px 0',
+    padding: '7px 10px',
+  },
+  '& .MuiInputBase-inputAdornedStart': {
+    paddingLeft: 0,
   },
 }));
 

@@ -6,6 +6,7 @@ interface ListProps<T> {
 }
 
 const List = <T,>({ renderListItem, data = [] }: ListProps<T>) => {
+  // TODO: Move to ChatList
   const Empty = (
     <Box sx={{ p: 2, textAlign: 'center' }}>
       <Typography variant="body1" fontWeight={500}>
@@ -19,7 +20,7 @@ const List = <T,>({ renderListItem, data = [] }: ListProps<T>) => {
   );
 
   return (
-    <MuiList sx={{ p: 0 }}>
+    <MuiList sx={{ p: 0, mx: -1 }}>
       {data.map((d) => renderListItem(d))}
       {data.length === 0 && Empty}
     </MuiList>

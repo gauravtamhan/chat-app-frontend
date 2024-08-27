@@ -13,16 +13,16 @@ const BasePanel = styled(Paper)(({ theme }) => {
 });
 
 interface PanelProps {
-  header: React.ReactNode;
+  header?: React.ReactNode;
   enableHeaderShadow?: boolean;
-  body: React.ReactNode;
+  body?: React.ReactNode;
   footer?: React.ReactNode;
 }
 
 const Panel = ({
-  header,
+  header = null,
   enableHeaderShadow = false,
-  body,
+  body = null,
   footer,
 }: PanelProps) => {
   return (
@@ -31,6 +31,7 @@ const Panel = ({
         sx={{
           px: 2,
           py: 1.25,
+          minHeight: 60,
           boxShadow: enableHeaderShadow
             ? '0 0 4px rgba(0, 0, 0, 0.2)'
             : 'initial',
@@ -39,8 +40,8 @@ const Panel = ({
         {header}
       </Box>
       {/* TODO: Check/clean up the re-used padding */}
-      <Box sx={{ px: 2, py: 1.25, overflowY: 'auto' }}>{body}</Box>
-      {footer && <Box sx={{ p: 2 }}>{footer}</Box>}
+      <Box sx={{ px: 2, py: 1.25, overflowY: 'auto', flex: 1 }}>{body}</Box>
+      {footer && <Box sx={{ px: 2, py: 1.5 }}>{footer}</Box>}
     </BasePanel>
   );
 };

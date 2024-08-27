@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   Box,
@@ -51,6 +51,8 @@ const ChatList = ({
         </IconButton>
       </Box>
       <Input
+        type="text"
+        autoComplete="off"
         showSearchIcon
         fullWidth
         placeholder="Search"
@@ -65,6 +67,9 @@ const ChatList = ({
   const renderListItem = (item: Conversation) => {
     const user = item.participants[0];
     const fullName = `${user.name.first} ${user.name.last}`;
+    const timestamp = new Date(item.lastUpdatedAt).toLocaleTimeString('en-US', {
+      timeStyle: 'short',
+    });
 
     return (
       <ListItem
@@ -72,7 +77,7 @@ const ChatList = ({
         disablePadding
         secondaryAction={
           false ? (
-            <Typography variant="caption">Thu 6/7</Typography>
+            <Typography variant="caption">{timestamp}</Typography>
           ) : (
             <IconButton edge="end" aria-label="delete">
               <MoreVertIcon />
@@ -91,7 +96,19 @@ const ChatList = ({
             <Avatar sx={{ width: 48, height: 48 }} src={user.avatarUrl} />
           </ListItemAvatar>
           <ListItemText
-            primary={fullName}
+            primary={
+              <React.Fragment>
+                {fullName}
+                <Typography
+                  sx={{ display: 'inline' }}
+                  component="span"
+                  variant="caption"
+                  color="text.secondary"
+                >
+                  {` • ${timestamp}`}
+                </Typography>
+              </React.Fragment>
+            }
             primaryTypographyProps={{ sx: { fontWeight: '500' } }}
             secondary={item.lastMessage}
             secondaryTypographyProps={{ noWrap: true }}

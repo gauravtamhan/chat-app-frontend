@@ -17,6 +17,10 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { selectedConversationId, conversations } = state;
 
+  const selectedConversation = conversations.find(
+    (item) => item.id === selectedConversationId
+  );
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -32,8 +36,15 @@ function App() {
             }}
           />
         }
-        right={<ChatDetails />}
-        showRight={false}
+        right={
+          <ChatDetails
+            conversation={selectedConversation}
+            onBackClick={() => {
+              dispatch(setSelectedConversationId());
+            }}
+          />
+        }
+        showRight={!!selectedConversationId}
       />
     </ThemeProvider>
   );
