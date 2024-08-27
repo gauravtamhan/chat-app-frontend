@@ -1,10 +1,34 @@
-import { Box, IconButton, Typography } from '@mui/material';
+import { useState } from 'react';
+import {
+  Avatar,
+  Box,
+  IconButton,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  ListItemAvatar,
+  Typography,
+} from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import List from './List';
 import Panel from '../../shared/components/Panel';
 import Input from '../../shared/components/Input';
+import { Conversation } from '../../api/models';
 
-const ChatList = () => {
+interface ChatListProps {
+  conversations: Conversation[];
+  selectedConversationId?: Conversation['id'];
+  handleSelection: (id: Conversation['id']) => void;
+}
+
+const ChatList = ({
+  conversations,
+  selectedConversationId,
+  handleSelection,
+}: ChatListProps) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
   const Header = (
     <Box>
       <Box
@@ -26,13 +50,63 @@ const ChatList = () => {
           <CreateIcon />
         </IconButton>
       </Box>
-      <Input showSearchIcon fullWidth placeholder="Search" />
+      <Input
+        showSearchIcon
+        fullWidth
+        placeholder="Search"
+        aria-label="search"
+        name="search"
+        value={searchTerm}
+        onChange={(event) => setSearchTerm(event.target.value)}
+      />
     </Box>
   );
 
-  const Body = <List />;
+  const renderListItem = (item: Conversation) => {
+    const user = item.participants[0];
+    const fullName = `${user.name.first} ${user.name.last}`;
 
-  return <Panel header={Header} body={Body} />;
+    return (
+      <ListItem
+        key={item.id}
+        disablePadding
+        secondaryAction={
+          false ? (
+            <Typography variant="caption">Thu 6/7</Typography>
+          ) : (
+            <IconButton edge="end" aria-label="delete">
+              <MoreVertIcon />
+            </IconButton>
+          )
+        }
+      >
+        <ListItemButton
+          sx={{ borderRadius: 3, pt: 1.25, pb: 1.25 }}
+          selected={item.id === selectedConversationId}
+          onClick={() => {
+            handleSelection(item.id);
+          }}
+        >
+          <ListItemAvatar>
+            <Avatar sx={{ width: 48, height: 48 }} src={user.avatarUrl} />
+          </ListItemAvatar>
+          <ListItemText
+            primary={fullName}
+            primaryTypographyProps={{ sx: { fontWeight: '500' } }}
+            secondary={item.lastMessage}
+            secondaryTypographyProps={{ noWrap: true }}
+          />
+        </ListItemButton>
+      </ListItem>
+    );
+  };
+
+  return (
+    <Panel
+      header={Header}
+      body={<List data={conversations} renderListItem={renderListItem} />}
+    />
+  );
 };
 
 export default ChatList;
