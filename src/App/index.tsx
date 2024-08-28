@@ -24,7 +24,7 @@ const globalStyles = (
   />
 );
 
-let count = 0;
+let uuidCount = 0;
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -64,12 +64,12 @@ function App() {
             }}
             onMessageSubmit={(content) => {
               const newMessage = {
-                id: String(count + 1000),
+                id: String(uuidCount + 1000),
                 type: 'outgoing' as MessageType,
                 content,
                 timestamp: new Date().toISOString(),
               };
-              count++;
+              uuidCount++;
               dispatch(addMessage(newMessage));
             }}
           />
