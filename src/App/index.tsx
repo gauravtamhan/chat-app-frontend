@@ -10,7 +10,13 @@ import reducer, { initialState } from '../store/reducer';
 import { setSelectedConversationId } from '../store/actions';
 
 const globalStyles = (
-  <GlobalStyles styles={{ body: { background: '#f5f5f5' } }} />
+  <GlobalStyles
+    styles={(theme) => ({
+      body: { background: '#f5f5f5' },
+      '.bubble-incoming + .bubble-outgoing, .bubble-outgoing + .bubble-incoming':
+        { marginTop: theme.spacing(1.25) },
+    })}
+  />
 );
 
 function App() {

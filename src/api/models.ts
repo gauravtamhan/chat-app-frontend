@@ -8,10 +8,15 @@ export interface User {
 }
 
 export interface Message {
-  id: number;
-  authorId: User['id'];
+  id: string;
+  type: 'incoming' | 'outgoing';
   content: string;
   timestamp: string;
+}
+
+export interface Thread {
+  messages: Message[];
+  startedAt: string;
 }
 
 export interface Conversation {
@@ -19,5 +24,5 @@ export interface Conversation {
   participants: User[];
   lastMessage: string;
   lastUpdatedAt: string;
-  messages: Message[];
+  threads: Thread[];
 }

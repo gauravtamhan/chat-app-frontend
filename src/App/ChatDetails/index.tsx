@@ -12,14 +12,14 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Panel from '../../shared/components/Panel';
 import Input from '../../shared/components/Input';
 import { Conversation } from '../../api/models';
-import Thread from './Thread';
+import ThreadDetails from './ThreadDetails';
 
-interface ChatDetails {
+interface ChatDetailsProps {
   conversation?: Conversation;
   onBackClick: () => void;
 }
 
-const ChatDetails = ({ conversation, onBackClick }: ChatDetails) => {
+const ChatDetails = ({ conversation, onBackClick }: ChatDetailsProps) => {
   const [message, setMessage] = useState('');
   const isMessageEmpty = !message;
 
@@ -32,7 +32,6 @@ const ChatDetails = ({ conversation, onBackClick }: ChatDetails) => {
     if (isMessageEmpty) return;
 
     resetInput();
-    console.log('hi');
   };
 
   const handleTextAreaKeyDown: React.KeyboardEventHandler<
@@ -105,7 +104,7 @@ const ChatDetails = ({ conversation, onBackClick }: ChatDetails) => {
     <Panel
       enableHeaderShadow
       header={Header}
-      body={<Thread messages={[]} />}
+      body={<ThreadDetails threads={conversation.threads} />}
       footer={Footer}
     />
   );

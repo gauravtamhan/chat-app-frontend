@@ -33,6 +33,7 @@ export default function reducer(state: AppState, action: AppActions): AppState {
         ),
       };
     }
+    // TODO: Need to handle cases where its a new message/conversation/thread
     case Actions.ADD_MESSAGE: {
       const selectedConversation = state.conversations.find(
         ({ id }) => id === state.selectedConversationId
@@ -40,7 +41,11 @@ export default function reducer(state: AppState, action: AppActions): AppState {
 
       if (selectedConversation === undefined) return { ...state };
 
-      selectedConversation.messages.push(action.payload);
+      selectedConversation.threads[
+        selectedConversation.threads.length - 1
+      ].messages.push(action.payload);
+
+      selectedConversation.lastMessage = action.payload.content;
 
       return {
         ...state,
