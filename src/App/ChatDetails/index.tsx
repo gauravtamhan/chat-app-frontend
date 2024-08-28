@@ -17,9 +17,14 @@ import ThreadDetails from './ThreadDetails';
 interface ChatDetailsProps {
   conversation?: Conversation;
   onBackClick: () => void;
+  onMessageSubmit: (message: string) => void;
 }
 
-const ChatDetails = ({ conversation, onBackClick }: ChatDetailsProps) => {
+const ChatDetails = ({
+  conversation,
+  onBackClick,
+  onMessageSubmit,
+}: ChatDetailsProps) => {
   const [message, setMessage] = useState('');
   const isMessageEmpty = !message;
 
@@ -31,6 +36,7 @@ const ChatDetails = ({ conversation, onBackClick }: ChatDetailsProps) => {
     event.preventDefault();
     if (isMessageEmpty) return;
 
+    onMessageSubmit(message);
     resetInput();
   };
 

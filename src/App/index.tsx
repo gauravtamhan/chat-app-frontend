@@ -6,8 +6,9 @@ import Layout from './Layout';
 import ChatList from './ChatList';
 import ChatDetails from './ChatDetails';
 import { theme } from './theme';
+import { MessageType } from '../api/models';
 import reducer, { initialState } from '../store/reducer';
-import { setSelectedConversationId } from '../store/actions';
+import { setSelectedConversationId, addMessage } from '../store/actions';
 
 const globalStyles = (
   <GlobalStyles
@@ -18,6 +19,8 @@ const globalStyles = (
     })}
   />
 );
+
+let count = 0;
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -47,6 +50,16 @@ function App() {
             conversation={selectedConversation}
             onBackClick={() => {
               dispatch(setSelectedConversationId());
+            }}
+            onMessageSubmit={(content) => {
+              const newMessage = {
+                id: String(count + 1000),
+                type: 'outgoing' as MessageType,
+                content,
+                timestamp: new Date().toISOString(),
+              };
+              count++;
+              dispatch(addMessage(newMessage));
             }}
           />
         }

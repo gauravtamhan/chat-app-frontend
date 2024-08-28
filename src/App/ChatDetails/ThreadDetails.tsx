@@ -109,7 +109,12 @@ const MessageBubble = ({
             bgcolor: bubbleColor,
           }}
         >
-          <Typography variant="body1" color={textColor} fontWeight={500}>
+          <Typography
+            variant="body1"
+            color={textColor}
+            fontWeight={500}
+            sx={{ whiteSpace: 'pre-line' }}
+          >
             {content}
           </Typography>
         </Box>

@@ -35,21 +35,31 @@ export default function reducer(state: AppState, action: AppActions): AppState {
     }
     // TODO: Need to handle cases where its a new message/conversation/thread
     case Actions.ADD_MESSAGE: {
-      const selectedConversation = state.conversations.find(
-        ({ id }) => id === state.selectedConversationId
-      );
+      const conversations = state.conversations.map((convo) => {
+        const isSelectedConvo = convo.id === state.selectedConversationId;
 
-      if (selectedConversation === undefined) return { ...state };
-
-      selectedConversation.threads[
-        selectedConversation.threads.length - 1
-      ].messages.push(action.payload);
-
-      selectedConversation.lastMessage = action.payload.content;
+        if (isSelectedConvo) {
+          return {
+            ...convo,
+            lastMessage: action.payload.content,
+            threads: convo.threads.map((thread, i, array) => {
+              const isLast = i === array.length - 1;
+              return isLast
+                ? {
+                    ...thread,
+                    messages: [...thread.messages, action.payload],
+                  }
+                : thread;
+            }),
+          };
+        } else {
+          return convo;
+        }
+      });
 
       return {
         ...state,
-        conversations: [...state.conversations, selectedConversation],
+        conversations,
       };
     }
     default: {

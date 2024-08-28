@@ -7,9 +7,10 @@ export interface User {
   avatarUrl: string;
 }
 
+export type MessageType = 'incoming' | 'outgoing';
 export interface Message {
   id: string;
-  type: 'incoming' | 'outgoing';
+  type: MessageType;
   content: string;
   timestamp: string;
 }
