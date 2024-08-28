@@ -1,6 +1,6 @@
 # Chat Application - Frontend
 
-This project showcases the UI interface of a chat application.
+This project showcases the UI interface of a chat application. A live version of the project can be viewed [here](https://chat-app-frontend-xi-sepia.vercel.app/).
 
 ![Chat App Screenshot](screenshot/hero.png 'Chat App Screenshot')
 
