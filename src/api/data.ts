@@ -139,6 +139,52 @@ const messages: Message[][] = [
       timestamp: '2023-09-11T07:22:22.000Z',
     },
   ],
+  [
+    {
+      id: '4763',
+      type: 'outgoing',
+      content:
+        'Looks good! Lets set up a 30 minute call to go over a few details.',
+      timestamp: '2024-02-21T18:40:20.000Z',
+    },
+    {
+      id: '4764',
+      type: 'outgoing',
+      content: 'How does tomorrow morning look for you?',
+      timestamp: '2024-02-21T18:41:25.000Z',
+    },
+  ],
+  [
+    {
+      id: '9724',
+      type: 'outgoing',
+      content: 'Do you need anything from the store?',
+      timestamp: '2024-08-18T20:01:22.000Z',
+    },
+    {
+      id: '9725',
+      type: 'incoming',
+      content: `Yeah, could you please grab these:
+        • eggs
+        • milk
+        • butter
+        • flour
+        • chocolate chips`,
+      timestamp: '2024-08-18T20:04:22.000Z',
+    },
+    {
+      id: '9726',
+      type: 'outgoing',
+      content: 'Sure thing. Want me to grab the pre-made mix too just in case?',
+      timestamp: '2024-08-18T20:05:03.000Z',
+    },
+    {
+      id: '9727',
+      type: 'incoming',
+      content: '...yes',
+      timestamp: '2024-08-18T20:05:53.000Z',
+    },
+  ],
 ];
 
 const threads: Thread[][] = [
@@ -147,11 +193,19 @@ const threads: Thread[][] = [
       startedAt: messages[0][0].timestamp,
       messages: messages[0],
     },
+    {
+      startedAt: messages[7][0].timestamp,
+      messages: messages[7],
+    },
   ],
   [
     {
       startedAt: messages[1][0].timestamp,
       messages: messages[1],
+    },
+    {
+      startedAt: messages[6][0].timestamp,
+      messages: messages[6],
     },
   ],
   [

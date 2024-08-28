@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
@@ -25,6 +25,10 @@ let count = 0;
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { selectedConversationId, conversations } = state;
+
+  useEffect(() => {
+    dispatch(setSelectedConversationId(conversations[0].id));
+  }, []);
 
   const selectedConversation = conversations.find(
     (item) => item.id === selectedConversationId
