@@ -136,7 +136,7 @@ const messages: Message[][] = [
       id: '6248',
       type: 'incoming',
       content: 'Hey there! Looking forward to chatting with you 🙂',
-      timestamp: '2023-09-11T07:22:22.000Z',
+      timestamp: '2023-09-11T19:22:22.000Z',
     },
   ],
   [
@@ -175,13 +175,14 @@ const messages: Message[][] = [
     {
       id: '9726',
       type: 'outgoing',
-      content: 'Sure thing. Want me to grab the pre-made mix too just in case?',
+      content:
+        'Sure thing. Want me to grab the pre-made cookie dough too just in case?',
       timestamp: '2024-08-18T20:05:03.000Z',
     },
     {
       id: '9727',
       type: 'incoming',
-      content: '...yes',
+      content: 'Hmm, yeah that might be good to have as well.',
       timestamp: '2024-08-18T20:05:53.000Z',
     },
   ],

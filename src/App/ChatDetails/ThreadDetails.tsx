@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   Box,
   Tooltip,
@@ -15,8 +15,19 @@ interface ThreadDetailsProps {
 }
 
 const ThreadDetails = ({ threads = [] }: ThreadDetailsProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({
+        block: 'end',
+        inline: 'nearest',
+      });
+    }
+  }, [threads]);
+
   return (
-    <Box>
+    <Box ref={containerRef}>
       {threads.map((t) => {
         return (
           <React.Fragment key={t.startedAt}>
