@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# Chat Application - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project showcases the UI interface of a chat application.
 
-Currently, two official plugins are available:
+![Chat App Screenshot](screenshot/hero.png 'Chat App Screenshot')
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+A few notable features of the app include:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- A fully responsive design (mobile + desktop)
+- Sending and viewing multiline messages in the thread
+- Searching chats
+- Adding new chats
+- Deleting chats
 
-- Configure the top-level `parserOptions` property like this:
+## Future Thoughts/Additions
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Given more time on the project a few areas that I would like to add/improve on include:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Full accessability audit for WCAG 2.0 AA compliance
+- Unit testing
+- Theme support (light/dark mode)
+- Views for handling loading state(s), such as for any potential async calls
+- Browser local storage for persisting chat info on reload
+- Additional features like group chat support
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Development
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+This project was bootstrapped with Vite + TypeScript + React. Additional libraries used include MUI.
+
+## Running the app locally
+
+Below are steps for running the project on your local machine.
+
+**Note:** Running the project requires Node version > v20.0.0.
+
+1. Clone the repo
+2. Run `npm install` to install all dependencies
+3. Run `npm run dev` to start the local development server, available at localhost:5173
