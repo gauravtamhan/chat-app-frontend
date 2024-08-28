@@ -3,12 +3,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 
-const StyledInput = styled(InputBase)(({ theme }) => ({
+const StyledInput = styled(InputBase)(() => ({
   '&': {
     borderRadius: 25,
-    // TODO: Do we want to handle theming?
-    backgroundColor:
-      theme.palette.mode === 'light' ? 'rgba(134, 142, 153, 0.1)' : '#1A2027',
+    backgroundColor: 'rgba(134, 142, 153, 0.1)',
   },
   '&.MuiInputBase-multiline': {
     padding: 0,

@@ -11,7 +11,6 @@ const List = <T,>({
   starterContent = null,
   data = [],
 }: ListProps<T>) => {
-  // TODO: Move to ChatList
   const Empty = (
     <Box sx={{ p: 2, textAlign: 'center' }}>
       <Typography variant="body1" fontWeight={500}>

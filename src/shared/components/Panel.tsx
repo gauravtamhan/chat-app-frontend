@@ -39,7 +39,6 @@ const Panel = ({
       >
         {header}
       </Box>
-      {/* TODO: Check/clean up the re-used padding */}
       <Box sx={{ px: 2, py: 1.25, overflowY: 'auto', flex: 1 }}>{body}</Box>
       {footer && <Box sx={{ px: 2, py: 1.5 }}>{footer}</Box>}
     </BasePanel>
