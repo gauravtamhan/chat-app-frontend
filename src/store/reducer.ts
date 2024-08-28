@@ -42,6 +42,7 @@ export default function reducer(state: AppState, action: AppActions): AppState {
           return {
             ...convo,
             lastMessage: action.payload.content,
+            lastUpdatedAt: action.payload.timestamp,
             threads: convo.threads.map((thread, i, array) => {
               const isLast = i === array.length - 1;
               return isLast
