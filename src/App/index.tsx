@@ -8,7 +8,11 @@ import ChatDetails from './ChatDetails';
 import { theme } from './theme';
 import { MessageType } from '../api/models';
 import reducer, { initialState } from '../store/reducer';
-import { setSelectedConversationId, addMessage } from '../store/actions';
+import {
+  setSelectedConversationId,
+  addMessage,
+  removeConversationById,
+} from '../store/actions';
 
 const globalStyles = (
   <GlobalStyles
@@ -46,6 +50,9 @@ function App() {
             selectedConversationId={selectedConversationId}
             handleSelection={(id) => {
               dispatch(setSelectedConversationId(id));
+            }}
+            handleDelete={(id) => {
+              dispatch(removeConversationById(id));
             }}
           />
         }

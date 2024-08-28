@@ -33,7 +33,6 @@ export default function reducer(state: AppState, action: AppActions): AppState {
         ),
       };
     }
-    // TODO: Need to handle cases where its a new message/conversation/thread
     case Actions.ADD_MESSAGE: {
       const conversations = state.conversations.map((convo) => {
         const isSelectedConvo = convo.id === state.selectedConversationId;

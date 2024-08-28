@@ -56,6 +56,7 @@ const ChatDetails = ({
           type="text"
           autoComplete="off"
           fullWidth
+          disabled={!conversation}
           multiline
           placeholder="Aa"
           sx={{ mr: 1 }}
