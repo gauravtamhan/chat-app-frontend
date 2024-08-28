@@ -14,6 +14,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import List from './List';
 import Panel from '../../shared/components/Panel';
 import Input from '../../shared/components/Input';
+import { formatDateString } from '../../shared/utils/date-formatter';
 import { Conversation } from '../../api/models';
 
 interface ChatListProps {
@@ -67,9 +68,7 @@ const ChatList = ({
   const renderListItem = (item: Conversation) => {
     const user = item.participants[0];
     const fullName = `${user.name.first} ${user.name.last}`;
-    const timestamp = new Date(item.lastUpdatedAt).toLocaleTimeString('en-US', {
-      timeStyle: 'short',
-    });
+    const timestamp = formatDateString('list-item', item.lastUpdatedAt);
 
     return (
       <ListItem

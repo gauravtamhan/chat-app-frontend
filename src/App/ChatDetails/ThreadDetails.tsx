@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Thread } from '../../api/models';
+import { formatDateString } from '../../shared/utils/date-formatter';
 
 interface ThreadDetailsProps {
   threads: Thread[];
@@ -36,14 +37,8 @@ const ThreadDetails = ({ threads = [] }: ThreadDetailsProps) => {
 };
 
 const DateBreak = ({ dateString }: { dateString: string }) => {
-  const date = new Date(dateString).toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    hour12: true,
-    hour: 'numeric',
-    minute: 'numeric',
-  });
+  const date = formatDateString('thread-details', dateString);
+
   return (
     <Box sx={{ py: 2, textAlign: 'center' }}>
       <Typography variant="body2" color="text.secondary">
@@ -79,12 +74,7 @@ const MessageBubble = ({
   const bubbleColor = type === 'outgoing' ? 'primary.main' : '#f0f0f0';
   const textColor = type === 'outgoing' ? 'common.white' : 'text.primary';
 
-  const time = new Date(timestamp).toLocaleString('en-US', {
-    weekday: 'long',
-    hour12: true,
-    hour: 'numeric',
-    minute: 'numeric',
-  });
+  const time = formatDateString('tooltip', timestamp);
 
   return (
     <Box
