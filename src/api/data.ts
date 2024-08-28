@@ -1,6 +1,6 @@
 import { Conversation, User, Message, Thread } from './models';
 
-const users: User[] = [
+export const users: User[] = [
   {
     id: 802,
     name: { first: 'Tim', last: 'Burton' },

@@ -15,6 +15,8 @@ import {
 } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CloseIcon from '@mui/icons-material/Close';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import CheckIcon from '@mui/icons-material/Check';
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -28,6 +30,9 @@ import ConfirmationDialog from './ConfirmationDialog';
 interface ChatListProps {
   conversations: Conversation[];
   selectedConversationId?: Conversation['id'];
+  isAddingChat: boolean;
+  onCloseAddChat: () => void;
+  onAddChat: () => void;
   handleSelection: (id: Conversation['id']) => void;
   handleDelete: (id: Conversation['id']) => void;
 }
@@ -35,6 +40,9 @@ interface ChatListProps {
 const ChatList = ({
   conversations,
   selectedConversationId,
+  isAddingChat,
+  onCloseAddChat,
+  onAddChat,
   handleSelection,
   handleDelete,
 }: ChatListProps) => {
@@ -91,7 +99,7 @@ const ChatList = ({
         <IconButton
           aria-label="New message"
           sx={{ bgcolor: 'action.hover' }}
-          onClick={() => null}
+          onClick={onAddChat}
         >
           <CreateIcon />
         </IconButton>
@@ -109,6 +117,33 @@ const ChatList = ({
       />
     </Box>
   );
+
+  const StarterContent = isAddingChat ? (
+    <ListItem
+      disablePadding
+      secondaryAction={
+        <IconButton edge="end" aria-label="delete" onClick={onCloseAddChat}>
+          <CloseIcon />
+        </IconButton>
+      }
+    >
+      <ListItemButton
+        sx={{ borderRadius: 3, pt: 1.25, pb: 1.25 }}
+        selected
+        onClick={() => null}
+      >
+        <ListItemAvatar>
+          <Avatar sx={{ width: 48, height: 48 }}>
+            <PersonAddIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          primary="New Message"
+          primaryTypographyProps={{ sx: { fontWeight: '500' } }}
+        />
+      </ListItemButton>
+    </ListItem>
+  ) : null;
 
   const renderListItem = (item: Conversation) => {
     const user = item.participants[0];
@@ -266,7 +301,11 @@ const ChatList = ({
       <Panel
         header={Header}
         body={
-          <List data={filteredConversations} renderListItem={renderListItem} />
+          <List
+            data={filteredConversations}
+            starterContent={StarterContent}
+            renderListItem={renderListItem}
+          />
         }
       />
     </>

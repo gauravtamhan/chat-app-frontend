@@ -2,10 +2,15 @@ import { Box, List as MuiList, Typography } from '@mui/material';
 
 interface ListProps<T> {
   data: T[];
+  starterContent?: React.ReactNode;
   renderListItem: (item: T) => React.ReactNode;
 }
 
-const List = <T,>({ renderListItem, data = [] }: ListProps<T>) => {
+const List = <T,>({
+  renderListItem,
+  starterContent = null,
+  data = [],
+}: ListProps<T>) => {
   // TODO: Move to ChatList
   const Empty = (
     <Box sx={{ p: 2, textAlign: 'center' }}>
@@ -21,6 +26,7 @@ const List = <T,>({ renderListItem, data = [] }: ListProps<T>) => {
 
   return (
     <MuiList sx={{ p: 0, mx: -1 }}>
+      {starterContent}
       {data.map((d) => renderListItem(d))}
       {data.length === 0 && Empty}
     </MuiList>

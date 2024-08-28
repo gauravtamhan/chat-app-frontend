@@ -22,7 +22,8 @@ export default function reducer(state: AppState, action: AppActions): AppState {
     case Actions.ADD_CONVERSATION: {
       return {
         ...state,
-        conversations: [...state.conversations, action.payload],
+        selectedConversationId: action.payload.id,
+        conversations: [action.payload, ...state.conversations],
       };
     }
     case Actions.REMOVE_CONVERSATION_BY_ID: {
