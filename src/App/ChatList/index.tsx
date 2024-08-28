@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Avatar,
   Box,
@@ -29,6 +29,21 @@ const ChatList = ({
   handleSelection,
 }: ChatListProps) => {
   const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredConversations = useMemo(() => {
+    if (!searchTerm) return conversations;
+
+    const regex = searchTerm
+      .replace(/[^a-zA-Z]/g, '')
+      .split('')
+      .join('.*');
+    return conversations.filter((convo) => {
+      const { name } = convo.participants[0];
+      return `${name.first} ${name.last} ${convo.lastMessage}`.match(
+        new RegExp(regex, 'i')
+      );
+    });
+  }, [searchTerm, conversations]);
 
   const Header = (
     <Box>
@@ -120,7 +135,9 @@ const ChatList = ({
   return (
     <Panel
       header={Header}
-      body={<List data={conversations} renderListItem={renderListItem} />}
+      body={
+        <List data={filteredConversations} renderListItem={renderListItem} />
+      }
     />
   );
 };
