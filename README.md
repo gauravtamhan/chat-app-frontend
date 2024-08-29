@@ -1,6 +1,6 @@
 # Chat Application - Frontend
 
-This project showcases the UI interface of a chat application.
+This project showcases the UI interface of a chat application. A live version of the project can be viewed [here](https://chat-app-frontend-xi-sepia.vercel.app/).
 
 ![Chat App Screenshot](screenshot/hero.png 'Chat App Screenshot')
 
@@ -9,7 +9,8 @@ This project showcases the UI interface of a chat application.
 A few notable features of the app include:
 
 - A fully responsive design (mobile + desktop)
-- Sending and viewing multiline messages in the thread
+- Sending and viewing multiline messages in a thread (press Shift + Enter when composing a message)
+- Timestamps for each message, seen when hovering over a message bubble
 - Searching chats
 - Adding new chats
 - Deleting chats
