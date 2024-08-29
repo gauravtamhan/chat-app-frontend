@@ -1,35 +1,44 @@
 import { Box, List as MuiList, Typography } from '@mui/material';
+import React from 'react';
 
 interface ListProps<T> {
   data: T[];
-  starterContent?: React.ReactNode;
   renderListItem: (item: T) => React.ReactNode;
+  ListHeaderComponent?: React.ReactNode;
+  ListEmptyComponent?: React.ReactNode;
 }
 
 const List = <T,>({
-  renderListItem,
-  starterContent = null,
   data = [],
+  renderListItem,
+  ListHeaderComponent = null,
+  ListEmptyComponent = null,
 }: ListProps<T>) => {
-  const Empty = (
-    <Box sx={{ p: 2, textAlign: 'center' }}>
-      <Typography variant="body1" fontWeight={500}>
-        No results found
-      </Typography>
-      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-        This is only a sample feature so the searching functionality may be
-        limited.
-      </Typography>
-    </Box>
-  );
-
   return (
     <MuiList sx={{ p: 0, mx: -1 }}>
-      {starterContent}
+      {ListHeaderComponent}
       {data.map((d) => renderListItem(d))}
-      {data.length === 0 && Empty}
+      {data.length === 0 && ListEmptyComponent}
     </MuiList>
   );
 };
+
+export interface ListEmptyProps {
+  primaryText: string;
+  secondaryText?: string;
+}
+
+export const ListEmpty = ({ primaryText, secondaryText }: ListEmptyProps) => (
+  <Box sx={{ p: 2, textAlign: 'center' }}>
+    <Typography variant="body1" fontWeight={500}>
+      {primaryText}
+    </Typography>
+    {secondaryText && (
+      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        {secondaryText}
+      </Typography>
+    )}
+  </Box>
+);
 
 export default List;

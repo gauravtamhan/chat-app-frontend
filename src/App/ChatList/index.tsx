@@ -20,7 +20,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import CheckIcon from '@mui/icons-material/Check';
 import NotificationsOffIcon from '@mui/icons-material/NotificationsOff';
 import DeleteIcon from '@mui/icons-material/Delete';
-import List from './List';
+import List, { ListEmpty, ListEmptyProps } from './List';
 import Panel from '../../shared/components/Panel';
 import Input from '../../shared/components/Input';
 import { formatDateString } from '../../shared/utils/date-formatter';
@@ -118,7 +118,7 @@ const ChatList = ({
     </Box>
   );
 
-  const StarterContent = isAddingChat ? (
+  const ListHeaderComponent = isAddingChat ? (
     <ListItem
       disablePadding
       secondaryAction={
@@ -263,6 +263,13 @@ const ChatList = ({
     );
   };
 
+  const listEmptyProps: ListEmptyProps = {
+    primaryText: searchTerm ? 'No results found' : 'No chats to show',
+    secondaryText: searchTerm
+      ? 'This is only a sample feature so the searching functionality may be limited.'
+      : 'Get started by creating a new message!',
+  };
+
   return (
     <>
       <ConfirmationDialog
@@ -303,8 +310,9 @@ const ChatList = ({
         body={
           <List
             data={filteredConversations}
-            starterContent={StarterContent}
             renderListItem={renderListItem}
+            ListHeaderComponent={ListHeaderComponent}
+            ListEmptyComponent={<ListEmpty {...listEmptyProps} />}
           />
         }
       />
