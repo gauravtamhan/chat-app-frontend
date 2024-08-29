@@ -119,6 +119,7 @@ const ChatDetails = ({
                 onChange={(_event, value) => {
                   setRecipient(value);
                 }}
+                noOptionsText="No matching contacts"
                 forcePopupIcon={false}
                 sx={{ width: '100%', '& .MuiInputBase-root': { py: 0.5 } }}
                 slotProps={{ paper: { elevation: 3 } }}
