@@ -123,7 +123,6 @@ const MessageBubble = ({
           <Typography
             variant="body1"
             color={textColor}
-            fontWeight={500}
             sx={{ whiteSpace: 'pre-line' }}
           >
             {content}
