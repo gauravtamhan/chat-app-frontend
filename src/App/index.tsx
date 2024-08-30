@@ -125,9 +125,7 @@ function App() {
         right={
           <ChatDetails
             conversation={selectedConversation}
-            onBackClick={() => {
-              dispatch(setSelectedConversationId());
-            }}
+            onBackClick={handleCloseAddChat}
             onMessageSubmit={onMessageSubmit}
             isAddingChat={isAddingChat}
             onNewMessageSubmit={onNewMessageSubmit}
