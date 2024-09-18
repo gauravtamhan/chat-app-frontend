@@ -7,15 +7,29 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Thread } from '../../api/models';
+import { Conversation, Thread } from '../../api/models';
 import { formatDateString } from '../../shared/utils/date-formatter';
 
 interface ThreadDetailsProps {
+  conversationId: Conversation['id'];
   threads: Thread[];
 }
 
-const ThreadDetails = ({ threads = [] }: ThreadDetailsProps) => {
+const ThreadDetails = ({
+  conversationId,
+  threads = [],
+}: ThreadDetailsProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({
+        block: 'end',
+        inline: 'nearest',
+        behavior: 'smooth',
+      });
+    }
+  }, [threads]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -24,7 +38,7 @@ const ThreadDetails = ({ threads = [] }: ThreadDetailsProps) => {
         inline: 'nearest',
       });
     }
-  }, [threads]);
+  }, [conversationId]);
 
   return (
     <Box ref={containerRef}>

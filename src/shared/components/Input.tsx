@@ -26,11 +26,7 @@ interface InputProps extends InputBaseProps {
   showSearchIcon?: boolean;
 }
 
-const Input = ({
-  startAdornment,
-  showSearchIcon = false,
-  ...props
-}: InputProps) => (
+const Input = ({ showSearchIcon = false, ...props }: InputProps) => (
   <StyledInput
     {...props}
     startAdornment={

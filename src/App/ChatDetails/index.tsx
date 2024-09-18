@@ -35,6 +35,7 @@ const ChatDetails = ({
 }: ChatDetailsProps) => {
   const [message, setMessage] = useState('');
   const [recipient, setRecipient] = useState<User | null>(null);
+  const ref = React.useRef<HTMLTextAreaElement>(null);
 
   const isMessageEmpty = !message;
 
@@ -43,6 +44,12 @@ const ChatDetails = ({
       setRecipient(null);
     }
   }, [isAddingChat]);
+
+  useEffect(() => {
+    if (recipient) {
+      ref.current?.focus();
+    }
+  }, [recipient]);
 
   const resetInput = () => {
     setMessage('');
@@ -75,6 +82,7 @@ const ChatDetails = ({
     <form onSubmit={handleSubmit}>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Input
+          inputRef={ref}
           type="text"
           autoComplete="off"
           fullWidth
@@ -142,10 +150,9 @@ const ChatDetails = ({
                   );
                 }}
                 renderInput={(params) => {
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
                   const { InputLabelProps, InputProps, ...rest } = params;
-                  return (
-                    <InputBase {...params.InputProps} {...rest} autoFocus />
-                  );
+                  return <InputBase {...InputProps} {...rest} autoFocus />;
                 }}
               />
             </HeaderComponent>
@@ -179,7 +186,12 @@ const ChatDetails = ({
     <Panel
       enableHeaderShadow
       header={Header}
-      body={<ThreadDetails threads={conversation.threads} />}
+      body={
+        <ThreadDetails
+          conversationId={conversation.id}
+          threads={conversation.threads}
+        />
+      }
       footer={Footer}
     />
   );

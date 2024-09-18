@@ -2,6 +2,7 @@ import { useState, useEffect, useReducer } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Layout from './Layout';
 import ChatList from './ChatList';
 import ChatDetails from './ChatDetails';
@@ -38,9 +39,13 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { selectedConversationId, conversations } = state;
   const [isAddingChat, setIsAddingChat] = useState(false);
+  const isAboveSm = useMediaQuery(theme.breakpoints.up('sm'));
 
   useEffect(() => {
-    dispatch(setSelectedConversationId(conversations[0].id));
+    if (isAboveSm) {
+      dispatch(setSelectedConversationId(conversations[0].id));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAddChat = () => {
