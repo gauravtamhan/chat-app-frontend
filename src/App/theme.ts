@@ -1,31 +1,45 @@
 import { createTheme } from '@mui/material/styles';
 
-// Augment the palette to include a custom color
-declare module '@mui/material/styles' {
-  interface Palette {
-    customGrey: Palette['primary'];
-  }
-
-  interface PaletteOptions {
-    customGrey?: PaletteOptions['primary'];
-  }
-}
-
-// Update the Button's color options to include the custom option
-declare module '@mui/material/Button' {
-  interface ButtonPropsColorOverrides {
-    customGrey: true;
-  }
-}
+const sharedPalette = {
+  grey: {
+    100: 'rgba(0, 0, 0, 0.04)',
+    800: 'rgba(255, 255, 255, 0.08)',
+  },
+};
 
 export const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#147efb',
+  colorSchemes: {
+    light: {
+      palette: {
+        ...sharedPalette,
+        primary: {
+          main: '#147efb',
+        },
+        secondary: {
+          main: 'rgba(0, 0, 0, 0.05)',
+          contrastText: 'rgba(0, 0, 0, 0.87)',
+        },
+        background: {
+          default: '#f5f5f5',
+          paper: '#fff',
+        },
+      },
     },
-    customGrey: {
-      main: 'rgba(0, 0, 0, 0.05)',
-      contrastText: 'rgba(0, 0, 0, 0.87)',
+    dark: {
+      palette: {
+        ...sharedPalette,
+        primary: {
+          main: '#1d8dff',
+        },
+        secondary: {
+          main: 'rgba(255, 255, 255, 0.12)',
+          contrastText: '#fff',
+        },
+        background: {
+          default: '#121212',
+          paper: '#1e1e1e',
+        },
+      },
     },
   },
   typography: {

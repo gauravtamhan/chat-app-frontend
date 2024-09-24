@@ -86,6 +86,11 @@ const StyledTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
+function getBubbleColor(mode: 'light' | 'dark', type: 'incoming' | 'outgoing') {
+  const incomingColor = mode === 'light' ? '#f0f0f0' : '#464646';
+  return type === 'outgoing' ? 'primary.main' : incomingColor;
+}
+
 const MessageBubble = ({
   type,
   content,
@@ -96,7 +101,6 @@ const MessageBubble = ({
   timestamp: string;
 }) => {
   const bubblePlacement = type === 'outgoing' ? 'row-reverse' : 'row';
-  const bubbleColor = type === 'outgoing' ? 'primary.main' : '#f0f0f0';
   const textColor = type === 'outgoing' ? 'common.white' : 'text.primary';
 
   const time = formatDateString('tooltip', timestamp);
@@ -124,15 +128,18 @@ const MessageBubble = ({
         }}
       >
         <Box
-          sx={{
+          sx={(theme) => ({
             maxWidth: '70%',
             width: 'fit-content',
             px: 1.5,
             py: 1,
             my: 0.125,
             borderRadius: 4.5,
-            bgcolor: bubbleColor,
-          }}
+            bgcolor: getBubbleColor('light', type),
+            ...theme.applyStyles('dark', {
+              bgcolor: getBubbleColor('dark', type),
+            }),
+          })}
         >
           <Typography
             variant="body1"

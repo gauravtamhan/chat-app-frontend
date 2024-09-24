@@ -133,7 +133,15 @@ const ChatList = ({
         onClick={() => null}
       >
         <ListItemAvatar>
-          <Avatar sx={{ width: 48, height: 48 }}>
+          <Avatar
+            sx={(theme) => ({
+              width: 48,
+              height: 48,
+              ...theme.applyStyles('dark', {
+                color: theme.palette.common.white,
+              }),
+            })}
+          >
             <PersonAddIcon />
           </Avatar>
         </ListItemAvatar>
@@ -282,7 +290,7 @@ const ChatList = ({
             <Button
               fullWidth
               variant="contained"
-              color="customGrey"
+              color="secondary"
               sx={{
                 borderRadius: 1.5,
               }}

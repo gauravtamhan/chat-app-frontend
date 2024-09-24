@@ -25,7 +25,6 @@ import {
 const globalStyles = (
   <GlobalStyles
     styles={(theme) => ({
-      body: { background: '#f5f5f5' },
       '.bubble-incoming + .bubble-outgoing, .bubble-outgoing + .bubble-incoming':
         { marginTop: theme.spacing(1.25) },
     })}

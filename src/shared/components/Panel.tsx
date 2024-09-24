@@ -19,6 +19,14 @@ interface PanelProps {
   footer?: React.ReactNode;
 }
 
+function getOptionalShadow(
+  mode: 'light' | 'dark',
+  enableHeaderShadow: boolean
+) {
+  const alpha = mode === 'light' ? 0.2 : 0.5;
+  return enableHeaderShadow ? `0 0 4px rgba(0, 0, 0, ${alpha})` : 'initial';
+}
+
 const Panel = ({
   header = null,
   enableHeaderShadow = false,
@@ -28,14 +36,15 @@ const Panel = ({
   return (
     <BasePanel>
       <Box
-        sx={{
+        sx={(theme) => ({
           px: 2,
           py: 1.25,
           minHeight: 60,
-          boxShadow: enableHeaderShadow
-            ? '0 0 4px rgba(0, 0, 0, 0.2)'
-            : 'initial',
-        }}
+          boxShadow: getOptionalShadow('light', enableHeaderShadow),
+          ...theme.applyStyles('dark', {
+            boxShadow: getOptionalShadow('dark', enableHeaderShadow),
+          }),
+        })}
       >
         {header}
       </Box>
